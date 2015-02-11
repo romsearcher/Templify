@@ -1,8 +1,40 @@
 <html>
 <head>
 	<title></title>
+	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="menu.js"></script>
+	<style type="text/css">
+		#rmenu{
+			position: absolute;
+			z-index: 10000;
+			background-color:#C0C0C0;
+		    border: 1px solid black;
+		    padding: 2px;
+		}
+	</style>
 </head>
 <body>
 	<h1>Hola Mundo</h1>
+	<p>I am a paragraph</p>
+	<div>I am a division</div>
+
+	<!-- MENU -->
+
+	<div class="hide" id="rmenu">
+        <ul>
+            <li>
+                <a href="http://www.google.com">Google</a>
+            </li>
+
+            <li>
+                <a href="http://localhost:8080/login">Localhost</a>
+            </li>
+
+            <li>
+                <a href="C:\">C</a>
+            </li>
+        </ul>
+    </div>
+
 </body>
 </html>

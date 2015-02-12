@@ -17,6 +17,8 @@
 		}
 	</style>
 	<script type="text/javascript" src="main.js"></script>
+	<script type="text/javascript" src="js/spectrum.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/spectrum.css">
 </head>
 <body>
 	<div class="container">
@@ -24,6 +26,23 @@
 			<h1>Hello World!</h1>
 			<p>Page to make more pages, pageception</p>
 		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-default" id="panel-css">
+				  <div class="panel-heading">Estilos CSS</div>
+				  <div class="panel-body">
+				    
+				  	<div id="color-properties" class="panel-css-component">
+				  		<input type='text' id="custom" />
+				  		<hr>
+				  	</div>
+
+				  </div>
+				</div>
+			</div>
+		</div>
+
 		<div class="row">
 			<div class="col-md-3">
 				<div class="btn-group-vertical" role="group" aria-label="Vertical button group">
@@ -45,15 +64,15 @@
 			      <button type="button" class="btn btn-default">Button</button>
 			      <div class="btn-group" role="group">
 			        <button id="btnGroupVerticalDrop2" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-			          Dropdown
+			          CSS Rules
 			          <span class="caret"></span>
 			        </button>
 			        <ul class="dropdown-menu" role="menu" aria-labelledby="btnGroupVerticalDrop2">
-			          <li><a href="#">Dropdown link</a></li>
-			          <li><a href="#">Dropdown link</a></li>
+			          <li><a href="#" class="css-rule">Dropdown link</a></li>
+			          <li><a href="#" class="css-rule">Dropdown link</a></li>
 			        </ul>
 			      </div>
-			      <div class="btn-group" role="group">
+<!-- 			      <div class="btn-group" role="group">
 			        <button id="btnGroupVerticalDrop3" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 			          Dropdown
 			          <span class="caret"></span>
@@ -72,8 +91,9 @@
 			          <li><a href="#">Dropdown link</a></li>
 			          <li><a href="#">Dropdown link</a></li>
 			        </ul>
-			      </div>
+			      </div> -->
 			    </div>
+
 			</div>
 			<div class="col-md-9">
 				<iframe id="paginaWeb" src="pagina.html"></iframe>

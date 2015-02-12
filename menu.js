@@ -1,6 +1,8 @@
 var selectedElem = null;
 var temp = null;
 
+var lockMenu = false;
+
 $(document).ready(function() {
 
 	$("#rmenu").hide();
@@ -17,7 +19,9 @@ $(document).ready(function() {
     });
 
 	$(document).bind("click", function(event) {
-		$("#rmenu").hide();
+    if (!lockMenu) {
+      $("#rmenu").hide();
+    }	
 	});
 
 	$("#select").click(function (){
@@ -34,6 +38,11 @@ $(document).ready(function() {
 			selectedElem = null;
 		}
 	});
+
+  $("#css").click(function (){
+    lockMenu = true;
+  });
+
 });
 
 function selectedElement(element){

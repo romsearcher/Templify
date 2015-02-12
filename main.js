@@ -1,4 +1,9 @@
 $(document).ready( function (){
+
+	$("#custom").spectrum({
+	    color: "#f00"
+	});
+
 	$("button.int").on('click', function (){
 		
 		// var selectedChildElem = $("#paginaweb").selectedElem;

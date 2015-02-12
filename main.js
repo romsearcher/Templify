@@ -1,5 +1,20 @@
 $(document).ready( function (){
-	$("button.int").click(function (){
-		$(this).css("background-color","royalblue");
+	$("button.int").on('click', function (){
+		
+		// var selectedChildElem = $("#paginaweb").selectedElem;
+		var pag = $("#paginaWeb");
+		var selectedChildElem = pag[0].contentWindow.selectedElem;
+		
+		var text = $(this).text();
+
+		if (text === "div") {
+			$(selectedChildElem).append($("<div>").text("This is an inserted div tag"));
+		}else if (text === "p") {
+			$(selectedChildElem).append($("<p>").text("This is an inserted p tag"));
+		}else if (text === "ul") {
+			$(selectedChildElem).append($("<ul>").text("list"));
+		}else if (text === "li") {
+			$(selectedChildElem).append($("<li>").text("list item"));
+		};
 	});
 });

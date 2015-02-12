@@ -2,6 +2,8 @@
 <head>
 	<title></title>
 	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript">
+	</script>
 	<script type="text/javascript" src="menu.js"></script>
 	<style type="text/css">
 		#rmenu{
@@ -9,7 +11,8 @@
 			z-index: 10000;
 			background-color:#C0C0C0;
 		    border: 1px solid black;
-		    padding: 2px;
+		    padding: 0px;
+		    width: 100px;
 		}
 	</style>
 </head>
@@ -21,17 +24,18 @@
 	<!-- MENU -->
 
 	<div class="hide" id="rmenu">
-        <ul>
+        <ul style="list-style-type: none;">
             <li>
-                <a href="http://www.google.com">Google</a>
+                <button id="select">Select</button>
             </li>
-
             <li>
-                <a href="http://localhost:8080/login">Localhost</a>
+                <button id="edit">Edit</button>
             </li>
-
             <li>
-                <a href="C:\">C</a>
+                <button id="css">CSS</button>
+            </li>
+            <li>
+                <button id="delete">Delete</button>
             </li>
         </ul>
     </div>

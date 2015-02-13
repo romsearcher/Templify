@@ -11,10 +11,10 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	<style type="text/css">
-		#paginaWeb{
-			width: 100%;
-			height: 500px;
-		}
+	#paginaWeb{
+		width: 100%;
+		height: 500px;
+	}
 	</style>
 	<script type="text/javascript" src="main.js"></script>
 	<script type="text/javascript" src="js/spectrum.js"></script>
@@ -23,82 +23,101 @@
 <body>
 	<div class="container">
 		<div class="jumbotron">
-			<h1>Hello World!</h1>
-			<p>Page to make more pages, pageception</p>
+			<h1>Templify!</h1>
+			<p>Page to make more pages, pageception! Make quick and easy prototypes.</p>
 		</div>
 
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default" id="panel-css">
-				  <div class="panel-heading">Estilos CSS</div>
-				  <div class="panel-body">
-				    
-				  	<div id="color-properties" class="panel-css-component">
-				  		<input type='text' id="custom" />
-				  		<hr>
-				  	</div>
+					<div class="panel-heading" id="panel-title">Editing Panel</div>
+					<div class="panel-body">
 
-				  </div>
+						<!-- PANEL FOR STYLES -->
+
+						<div id="color-properties" class="panel-component">
+							<h3>CSS styles</h3>
+							<hr>
+							<input type='text' id="custom" />
+						</div>
+
+						<!-- PANEL FOR EDITING -->
+
+						<div id="edit-properties" class="panel-component">
+							<h3>Edit properties</h3>
+							<hr>
+							<input type="text" id="edit-input">
+							<button class="btn btn-success" type="submit" id="edit-button">Guardar</button>
+						</div>
+
+					</div>
 				</div>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-md-3">
-				<div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-			      <button type="button" class="btn btn-default int" id="">div</button>
-			      <button type="button" class="btn btn-default int">p</button>
-			      <button type="button" class="btn btn-default int">ul</button>
-			      <button type="button" class="btn btn-default int">li</button>
-			      <div class="btn-group" role="group">
-			        <button id="btnGroupVerticalDrop1" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-			          HTML elements
-			          <span class="caret"></span>
-			        </button>
-			        <ul class="dropdown-menu" role="menu" aria-labelledby="btnGroupVerticalDrop1">
-			          <li><a href="#">Dropdown link</a></li>
-			          <li><a href="#">Dropdown link</a></li>
-			        </ul>
-			      </div>
-			      <button type="button" class="btn btn-default">Button</button>
-			      <button type="button" class="btn btn-default">Button</button>
-			      <div class="btn-group" role="group">
-			        <button id="btnGroupVerticalDrop2" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-			          CSS Rules
-			          <span class="caret"></span>
-			        </button>
-			        <ul class="dropdown-menu" role="menu" aria-labelledby="btnGroupVerticalDrop2">
-			          <li><a href="#" class="css-rule">Dropdown link</a></li>
-			          <li><a href="#" class="css-rule">Dropdown link</a></li>
-			        </ul>
-			      </div>
-<!-- 			      <div class="btn-group" role="group">
-			        <button id="btnGroupVerticalDrop3" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-			          Dropdown
-			          <span class="caret"></span>
-			        </button>
-			        <ul class="dropdown-menu" role="menu" aria-labelledby="btnGroupVerticalDrop3">
-			          <li><a href="#">Dropdown link</a></li>
-			          <li><a href="#">Dropdown link</a></li>
-			        </ul>
-			      </div>
-			      <div class="btn-group" role="group">
-			        <button id="btnGroupVerticalDrop4" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-			          Dropdown
-			          <span class="caret"></span>
-			        </button>
-			        <ul class="dropdown-menu" role="menu" aria-labelledby="btnGroupVerticalDrop4">
-			          <li><a href="#">Dropdown link</a></li>
-			          <li><a href="#">Dropdown link</a></li>
-			        </ul>
-			      </div> -->
-			    </div>
+				<h3>Inserting elements:</h3>
+				<div class="btn-group" role="group" aria-label="...">
+					<button type="button" class="btn btn-default btn-insert" id="btn-before">Before</button>
+					<button type="button" class="btn btn-default btn-insert active" id="btn-append">Append</button>
+					<button type="button" class="btn btn-default btn-insert" id="btn-after">After</button>
+				</div>
+				<hr>
 
-			</div>
-			<div class="col-md-9">
-				<iframe id="paginaWeb" src="pagina.html"></iframe>
-			</div>
+				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+					<div class="panel panel-default">
+						<div class="panel-heading" role="tab" id="headingOne">
+							<h4 class="panel-title">
+								<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+									HTML Elements
+								</a>
+							</h4>
+						</div>
+						<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+							<div class="panel-body">
+								<button type="button" class="btn btn-default int">div</button>
+								<button type="button" class="btn btn-default int">p</button>
+								<button type="button" class="btn btn-default int">ul</button>
+								<button type="button" class="btn btn-default int">li</button>
+								<hr>
+								<button type="button" class="btn btn-default int">table</button>
+								<button type="button" class="btn btn-default int">tr</button>
+								<button type="button" class="btn btn-default int">td</button>
+								<hr>
+								<button type="button" class="btn btn-default int">h1</button>
+								<button type="button" class="btn btn-default int">h2</button>
+								<button type="button" class="btn btn-default int">h3</button>
+								<button type="button" class="btn btn-default int">h4</button>
+								<button type="button" class="btn btn-default int">h5</button>
+								<button type="button" class="btn btn-default int">h6</button>
+								<hr>
+								<button type="button" class="btn btn-default int">img</button>
+								<button type="button" class="btn btn-default int">hr</button>
+							</div>
+						</div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading" role="tab" id="headingTwo">
+							<h4 class="panel-title">
+								<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+									Components
+								</a>
+							</h4>
+						</div>
+						<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+							<div class="panel-body">
+								Something good can work
+							</div>
+						</div>
+					</div>
+				</div>
+		</div>
+		<div class="col-md-9">
+			<iframe id="paginaWeb" src="pagina.html"></iframe>
+			<!-- <iframe id="paginaWeb" src="http://cannelilla.com"></iframe> -->
 		</div>
 	</div>
+</div>
 </body>
 </html>

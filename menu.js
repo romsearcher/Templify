@@ -39,9 +39,16 @@ $(document).ready(function() {
 		}
 	});
 
-  $("#css").click(function (){
-    lockMenu = true;
-  });
+	$("#edit").click(function (){
+		if (temp != null) {
+			selectedElem = temp;
+			window.parent.editSelectedElement();
+		}
+	});
+
+  	$("#css").click(function (){
+    	// lockMenu = true;
+  	});
 
 });
 

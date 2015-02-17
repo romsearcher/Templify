@@ -49,6 +49,41 @@ $(document).ready( function (){
 		$(selectedChildElem).text(text);
 	});
 
+	$("#edit-direct-save").click(function (){
+		var cssProps = $("#edit-direct").val();
+		var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
+		//get the old styles from the elem
+
+		//IMPORTANT! More styles may apply to this element from a file
+		var oldStyles = $(selectedChildElem).attr("style");
+
+		var inputStyles = $("#edit-direct").val();
+		var styleList = inputStyles.split(";");
+
+		var finalArray = new Array();
+		// var finalArray = "";
+		var plainObj = {};
+
+		$.each(styleList, function(key,value){
+			var min = value.split(":");
+			var arr = new Array();
+			// arr[min[0]] = min[1];
+			// finalArray.push(arr);
+			plainObj[min[0]] = min[1];
+			finalArray[ min[0] ] = min[1];
+
+			// if (key == styleList.length - 1)
+			// 	finalArray += value;
+			// else
+			// 	finalArray += value + ",";
+		});
+
+		var obj = toObject(finalArray);
+		// var strin = JSON.stringify(finalArray);
+		$(selectedChildElem).css(plainObj);
+
+	});
+
 	$(".btn-insert").click(function (){
 		var text = $(this).text();
 		if (text === "Before"){
@@ -71,6 +106,13 @@ $(document).ready( function (){
 		}
 	});
 });
+
+function toObject(arr) {
+  var rv = {};
+  for (var i = 0; i < arr.length; ++i)
+    rv[i] = arr[i];
+  return rv;
+}
 
 function editSelectedElement(){
 	var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;

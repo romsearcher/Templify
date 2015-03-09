@@ -4,6 +4,7 @@
 	<script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/main.css">
 
 	<!-- Optional theme -->
 	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
@@ -22,7 +23,7 @@
 </head>
 <body>
 	<div class="container">
-		<div class="jumbotron">
+		<div class="jumbotron" style="margin-top:20px;">
 			<h1>Templify!</h1>
 			<p>Page to make more pages, pageception! Make quick and easy prototypes.</p>
 		</div>
@@ -117,11 +118,13 @@
 							</h4>
 						</div>
 						<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-							<div class="panel-body">
+							<div class="panel-body" id="components-body">
 								Something good can work always
 							</div>
 						</div>
 					</div>
+					<hr>
+					<button class="btn btn-success" type="submit" id="component-button">Create Component</button>
 				</div>
 		</div>
 		<div class="col-md-9">

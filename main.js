@@ -1,6 +1,9 @@
 //Global vars
 
 var insertingStyle = 1;
+var numCreatedComponent = 0;
+
+var createdComponentsArray = new Array();
 
 $(document).ready( function (){
 
@@ -25,15 +28,6 @@ $(document).ready( function (){
 		
 		var text = $(this).text();
 
-		// if (text === "div") {
-		// 	$(selectedChildElem).append($("<div>").text("This is an inserted div tag"));
-		// }else if (text === "p") {
-		// 	$(selectedChildElem).append($("<p>").text("This is an inserted p tag"));
-		// }else if (text === "ul") {
-		// 	$(selectedChildElem).append($("<ul>").text("list"));
-		// }else if (text === "li") {
-		// 	$(selectedChildElem).append($("<li>").text("list item"));
-		// };
 		if (insertingStyle == 0) {
 			$(selectedChildElem).before($("<" + text + ">").text("This is a before " + text));
 		}else if (insertingStyle == 1) {
@@ -104,6 +98,37 @@ $(document).ready( function (){
 			$("#btn-append").attr("class","btn btn-default btn-insert");
 			$("#btn-after").attr("class","btn btn-default btn-insert active");
 		}
+	});
+
+	$("#component-button").click(function (){
+		var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;		
+		var createdButton = $("<button>").attr("class","btn btn-default btn-created-component").attr("num",numCreatedComponent + "").text("Created component " + numCreatedComponent);
+		numCreatedComponent += 1;
+
+		//IF the same element is referenced instead of a clone, then the element will be moved!
+		//Move method: createdComponentsArray.push(selectedChildElem);
+
+		createdComponentsArray.push($(selectedChildElem).clone());
+		
+		$("#components-body").append(createdButton);
+		alert("Component created!");
+
+		$(".btn-created-component").click(function (){
+			var num = parseInt($(this).attr("num"));
+			var component = createdComponentsArray[num];
+
+			var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
+
+			//DRY FIX
+
+			if (insertingStyle == 0) {
+				$(selectedChildElem).before($(component));
+			}else if (insertingStyle == 1) {
+				$(selectedChildElem).append($(component));
+			}else if (insertingStyle == 2) {
+				$(selectedChildElem).after($(component));
+			}
+		});
 	});
 });
 

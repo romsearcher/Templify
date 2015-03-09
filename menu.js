@@ -50,6 +50,13 @@ $(document).ready(function() {
     	// lockMenu = true;
   	});
 
+  	$("#parent").click(function (){
+  		if (selectedElem != null){
+			selectedElem.css("color", "black");
+		}
+		selectedElement($(temp).parent());
+  	});
+
 });
 
 function selectedElement(element){

@@ -135,11 +135,57 @@ $(document).ready( function (){
 	});
 
 	$("#up-one-btn").click(function (){
-
+		var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
+		$("#paginaWeb")[0].contentWindow.selectedElement($(selectedChildElem).parent());
+		selectedElementChanged();
 	});
 
 	$("#down-one-btn").click(function (){
+		var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
 
+		//Could also be used to traverse same level elements
+		$("#paginaWeb")[0].contentWindow.selectedElement($(selectedChildElem).children()[0]);
+		selectedElementChanged();
+	});
+
+	$("#right-one-btn").click(function (){
+		var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
+		var children = $(selectedChildElem).parent().children();
+
+		var myPos = 0;
+		//minus one for the element for the menu
+		for (var i = 0; i < children.length - 1; i++){
+			if ($(children[i]).is(selectedChildElem)) {
+				myPos = i;
+			}
+		}
+		if (myPos + 1 < children.length - 1) {
+			myPos++;
+		}
+
+		$("#paginaWeb")[0].contentWindow.selectedElement($(children[myPos]));
+		selectedElementChanged();
+	});
+
+
+	//DRY fix required
+	$("#left-one-btn").click(function (){
+		var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
+		var children = $(selectedChildElem).parent().children();
+
+		var myPos = 0;
+		//minus one for the element for the menu
+		for (var i = 0; i < children.length - 1; i++){
+			if ($(children[i]).is(selectedChildElem)) {
+				myPos = i;
+			}
+		}
+		if (myPos - 1 > -1) {
+			myPos--;
+		}
+
+		$("#paginaWeb")[0].contentWindow.selectedElement($(children[myPos]));
+		selectedElementChanged();
 	});
 });
 

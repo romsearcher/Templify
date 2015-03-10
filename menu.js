@@ -19,9 +19,9 @@ $(document).ready(function() {
     });
 
 	$(document).bind("click", function(event) {
-    if (!lockMenu) {
-      $("#rmenu").hide();
-    }	
+		if (!lockMenu) {
+			$("#rmenu").hide();
+		}	
 	});
 
 	$("#select").click(function (){
@@ -47,17 +47,17 @@ $(document).ready(function() {
 		}
 	});
 
-  	$("#css").click(function (){
+	$("#css").click(function (){
     	// lockMenu = true;
-  	});
+    });
 
-  	$("#parent").click(function (){
-  		if (selectedElem != null){
+	$("#parent").click(function (){
+		if (selectedElem != null){
 			selectedElem.css("color", "black");
 		}
 		selectedElement($(temp).parent());
 		window.parent.selectedElementChanged();
-  	});
+	});
 
 });
 

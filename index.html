@@ -19,7 +19,9 @@
 	</style>
 	<script type="text/javascript" src="main.js"></script>
 	<script type="text/javascript" src="js/spectrum.js"></script>
+	<script type="text/javascript" src="js/treed.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/spectrum.css">
+	<link rel="stylesheet" type="text/css" href="css/treed.css">
 </head>
 <body>
 	<div class="container">
@@ -29,7 +31,7 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-8">
 				<div class="panel panel-default" id="panel-css">
 					<div class="panel-heading" id="panel-title">Editing Panel</div>
 					<div class="panel-body">
@@ -56,6 +58,58 @@
 							<hr>
 							<input type="text" id="edit-direct" placeholder="; separated styles">
 							<button class="btn btn-success" type="submit" id="edit-direct-save">Aplicar</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="panel panel-default" id="panel-css">
+					<div class="panel-heading" id="panel-title">Element Panel</div>
+					<div class="panel-body">
+
+						<!-- PANEL FOR STYLES -->
+
+						<div class="panel-component">
+							<h3>Selected Element</h3>
+							<hr>
+						</div>
+
+						<!-- PANEL FOR EDITING -->
+
+						<div class="panel-component">
+							<h3 id="tag-name">-No element selected-</h3>
+
+							<!-- begin space for treed -->
+							
+							<ul id="tree1">
+				                <li><a href="#">None</a>				                
+				                    <ul>
+				                        <li>Company Maintenance</li>
+				                        <li>Employees
+				                            <ul>
+				                                <li>Reports
+				                                    <ul>
+				                                        <li>Report1</li>
+				                                        <li>Report2</li>
+				                                        <li>Report3</li>
+				                                    </ul>
+				                                </li>
+				                                <li>Employee Maint.</li>
+				                            </ul>
+				                        </li>
+				                        <li>Human Resources</li>
+				                    </ul>
+				                </li>
+				            </ul>
+
+				            <!-- end space for treed -->							
+							<hr>
+						</div>
+
+						<div class="panel-component">
+							<button class="btn btn-success btn-lg" id="up-one-btn"> <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></button>
+							<button class="btn btn-success btn-lg" id="down-one-btn"> <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></button>
 						</div>
 
 					</div>

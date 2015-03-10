@@ -4,6 +4,7 @@ var insertingStyle = 1;
 var numCreatedComponent = 0;
 
 var createdComponentsArray = new Array();
+var currentSelectedElement = null;
 
 $(document).ready( function (){
 
@@ -16,6 +17,8 @@ $(document).ready( function (){
 	$("#custom").spectrum({
 	    color: "#f00"
 	});
+
+	$('#tree1').treed();
 
 	//---------------------------------------------------------------------
 	//-------------------------------EVENTS--------------------------------
@@ -122,13 +125,21 @@ $(document).ready( function (){
 			//DRY FIX
 
 			if (insertingStyle == 0) {
-				$(selectedChildElem).before($(component));
+				$(selectedChildElem).before($(component).clone());
 			}else if (insertingStyle == 1) {
-				$(selectedChildElem).append($(component));
+				$(selectedChildElem).append($(component).clone());
 			}else if (insertingStyle == 2) {
-				$(selectedChildElem).after($(component));
+				$(selectedChildElem).after($(component).clone());
 			}
 		});
+	});
+
+	$("#up-one-btn").click(function (){
+
+	});
+
+	$("#down-one-btn").click(function (){
+
 	});
 });
 
@@ -147,3 +158,51 @@ function editSelectedElement(){
 function saveEditChangesElement(){
 
 }
+
+function selectedElementChanged(){
+	var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
+	$("#tag-name").text($(selectedChildElem).prop("tagName"));
+
+	//CALL to recursive algorithm function
+	makeTreed();
+	$('#tree1').treed();	
+}
+
+function makeTreed(){
+	var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
+	// console.log($(selectedChildElem).prop("tagName"));
+
+	var rootElement = $("#tree1");
+	//erase the current tree
+	$(rootElement).empty();
+
+	// var base = $("<li>");
+	// var baseLi = $("<a>").attr("href","#").text($(selectedChildElem).prop("tagName"));
+	// $(base).append($(baseLi));
+	// $(rootElement).append($(base));
+
+	//CORE of the function
+	if($(selectedChildElem).children().length > 0){
+		tree(rootElement,selectedChildElem);
+	}
+}
+
+function tree(base,currentElem){
+	var children = $(currentElem).children();
+	if(children.length == 0){
+		//base case
+		var child = $("<li>").text($(currentElem).prop("tagName"));
+		$(base).append($(child));
+	}else{
+		var li = $("<li>").text($(currentElem).prop("tagName"));
+		var ul = $("<ul>");
+		for (var i = 0; i < children.length; i++) {
+			tree(ul,children[i]);	
+		}
+		$(li).append($(ul));
+		$(base).append($(li));
+	}
+}
+
+
+

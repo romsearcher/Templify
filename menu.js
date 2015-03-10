@@ -29,6 +29,7 @@ $(document).ready(function() {
 			selectedElem.css("color", "black");
 		}
 		selectedElement(temp);
+		window.parent.selectedElementChanged();
 	});
 
 	$("#delete").click(function (){
@@ -55,6 +56,7 @@ $(document).ready(function() {
 			selectedElem.css("color", "black");
 		}
 		selectedElement($(temp).parent());
+		window.parent.selectedElementChanged();
   	});
 
 });

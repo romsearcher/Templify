@@ -1,6 +1,10 @@
 //Global vars
 
 var insertingStyle = 1;
+var numCreatedComponent = 0;
+
+var createdComponentsArray = new Array();
+var currentSelectedElement = null;
 
 $(document).ready( function (){
 
@@ -14,6 +18,8 @@ $(document).ready( function (){
 	    color: "#f00"
 	});
 
+	$('#tree1').treed();
+
 	//---------------------------------------------------------------------
 	//-------------------------------EVENTS--------------------------------
 	//---------------------------------------------------------------------
@@ -25,15 +31,6 @@ $(document).ready( function (){
 		
 		var text = $(this).text();
 
-		// if (text === "div") {
-		// 	$(selectedChildElem).append($("<div>").text("This is an inserted div tag"));
-		// }else if (text === "p") {
-		// 	$(selectedChildElem).append($("<p>").text("This is an inserted p tag"));
-		// }else if (text === "ul") {
-		// 	$(selectedChildElem).append($("<ul>").text("list"));
-		// }else if (text === "li") {
-		// 	$(selectedChildElem).append($("<li>").text("list item"));
-		// };
 		if (insertingStyle == 0) {
 			$(selectedChildElem).before($("<" + text + ">").text("This is a before " + text));
 		}else if (insertingStyle == 1) {
@@ -105,6 +102,91 @@ $(document).ready( function (){
 			$("#btn-after").attr("class","btn btn-default btn-insert active");
 		}
 	});
+
+	$("#component-button").click(function (){
+		var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;		
+		var createdButton = $("<button>").attr("class","btn btn-default btn-created-component").attr("num",numCreatedComponent + "").text("Created component " + numCreatedComponent);
+		numCreatedComponent += 1;
+
+		//IF the same element is referenced instead of a clone, then the element will be moved!
+		//Move method: createdComponentsArray.push(selectedChildElem);
+
+		createdComponentsArray.push($(selectedChildElem).clone());
+		
+		$("#components-body").append(createdButton);
+		alert("Component created!");
+
+		$(".btn-created-component").click(function (){
+			var num = parseInt($(this).attr("num"));
+			var component = createdComponentsArray[num];
+
+			var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
+
+			//DRY FIX
+
+			if (insertingStyle == 0) {
+				$(selectedChildElem).before($(component).clone());
+			}else if (insertingStyle == 1) {
+				$(selectedChildElem).append($(component).clone());
+			}else if (insertingStyle == 2) {
+				$(selectedChildElem).after($(component).clone());
+			}
+		});
+	});
+
+	$("#up-one-btn").click(function (){
+		var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
+		$("#paginaWeb")[0].contentWindow.selectedElement($(selectedChildElem).parent());
+		selectedElementChanged();
+	});
+
+	$("#down-one-btn").click(function (){
+		var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
+
+		//Could also be used to traverse same level elements
+		$("#paginaWeb")[0].contentWindow.selectedElement($(selectedChildElem).children()[0]);
+		selectedElementChanged();
+	});
+
+	$("#right-one-btn").click(function (){
+		var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
+		var children = $(selectedChildElem).parent().children();
+
+		var myPos = 0;
+		//minus one for the element for the menu
+		for (var i = 0; i < children.length - 1; i++){
+			if ($(children[i]).is(selectedChildElem)) {
+				myPos = i;
+			}
+		}
+		if (myPos + 1 < children.length - 1) {
+			myPos++;
+		}
+
+		$("#paginaWeb")[0].contentWindow.selectedElement($(children[myPos]));
+		selectedElementChanged();
+	});
+
+
+	//DRY fix required
+	$("#left-one-btn").click(function (){
+		var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
+		var children = $(selectedChildElem).parent().children();
+
+		var myPos = 0;
+		//minus one for the element for the menu
+		for (var i = 0; i < children.length - 1; i++){
+			if ($(children[i]).is(selectedChildElem)) {
+				myPos = i;
+			}
+		}
+		if (myPos - 1 > -1) {
+			myPos--;
+		}
+
+		$("#paginaWeb")[0].contentWindow.selectedElement($(children[myPos]));
+		selectedElementChanged();
+	});
 });
 
 function toObject(arr) {
@@ -122,3 +204,51 @@ function editSelectedElement(){
 function saveEditChangesElement(){
 
 }
+
+function selectedElementChanged(){
+	var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
+	$("#tag-name").text($(selectedChildElem).prop("tagName"));
+
+	//CALL to recursive algorithm function
+	makeTreed();
+	$('#tree1').treed();	
+}
+
+function makeTreed(){
+	var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
+	// console.log($(selectedChildElem).prop("tagName"));
+
+	var rootElement = $("#tree1");
+	//erase the current tree
+	$(rootElement).empty();
+
+	// var base = $("<li>");
+	// var baseLi = $("<a>").attr("href","#").text($(selectedChildElem).prop("tagName"));
+	// $(base).append($(baseLi));
+	// $(rootElement).append($(base));
+
+	//CORE of the function
+	if($(selectedChildElem).children().length > 0){
+		tree(rootElement,selectedChildElem);
+	}
+}
+
+function tree(base,currentElem){
+	var children = $(currentElem).children();
+	if(children.length == 0){
+		//base case
+		var child = $("<li>").text($(currentElem).prop("tagName"));
+		$(base).append($(child));
+	}else{
+		var li = $("<li>").text($(currentElem).prop("tagName"));
+		var ul = $("<ul>");
+		for (var i = 0; i < children.length; i++) {
+			tree(ul,children[i]);	
+		}
+		$(li).append($(ul));
+		$(base).append($(li));
+	}
+}
+
+
+

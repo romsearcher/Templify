@@ -24,7 +24,7 @@
 	<link rel="stylesheet" type="text/css" href="css/treed.css">
 </head>
 <body>
-	<div class="container">
+	<div class="container">		
 		<div class="jumbotron" style="margin-top:20px;">
 			<h1>Templify!</h1>
 			<p>Page to make more pages, pageception! Make quick and easy prototypes.</p>
@@ -32,35 +32,79 @@
 
 		<div class="row">
 			<div class="col-md-8">
-				<div class="panel panel-default" id="panel-css">
-					<div class="panel-heading" id="panel-title">Editing Panel</div>
-					<div class="panel-body">
+				<div role="tabpanel">
+				  <!-- Nav tabs -->
+				  <ul class="nav nav-tabs" role="tablist">
+				    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Editing panel</a></li>
+				    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Atributes panel</a></li>
+				    <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
+				    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+				  </ul>
 
-						<!-- PANEL FOR STYLES -->
+				  <!-- Tab panes -->
+				  <div class="tab-content">
+				    <div role="tabpanel" class="tab-pane active" id="home">
+				    	<div class="panel panel-default" id="panel-css">
+							<div class="panel-heading" id="panel-title">Editing Panel</div>
+							<div class="panel-body">
 
-						<div id="color-properties" class="panel-component">
-							<h3>CSS styles</h3>
-							<hr>
-							<input type='text' id="custom" />
+								<!-- PANEL FOR STYLES -->
+
+								<div id="color-properties" class="panel-component">
+									<h3>CSS styles</h3>
+									<hr>
+									<input type='text' id="custom" />
+								</div>
+
+								<!-- PANEL FOR EDITING -->
+
+								<div id="edit-properties" class="panel-component">
+									<h3>Edit properties</h3>
+									<hr>
+									<input type="text" id="edit-input">
+									<button class="btn btn-success" type="submit" id="edit-button">Guardar</button>
+								</div>
+
+								<div id="edit-directly" class="panel-component">
+									<h3>Edit CSS directly</h3>
+									<hr>
+									<input type="text" id="edit-direct" placeholder="; separated styles">
+									<button class="btn btn-success" type="submit" id="edit-direct-save">Aplicar</button>
+								</div>
+
+							</div>
 						</div>
+				    </div>
+				    <div role="tabpanel" class="tab-pane" id="profile">
+						<div class="panel panel-default" id="panel-css">
+							<div class="panel-heading" id="panel-title">Attributes Panel</div>
+							<div class="panel-body">
 
-						<!-- PANEL FOR EDITING -->
+								<!-- PANEL FOR STYLES -->
+								<div class="form-group">
+									<label for="attr-id">Id for element</label>
+									<input type="text" class="form-control" id="attr-id" placeholder="Enter id">
+									<br>
+									<button class="btn btn-success" type="submit" id="attr-id-save">Cambiar</button>
+								</div>
+								<hr>
+								<h3>Classes</h3>
+								<div id="attr-classes"></div>
+								<hr>
+								<div class="form-group">
+									<label for="attr-class">Add class</label>
+									<input type="text" class="form-control" id="attr-class" placeholder="Add class">
+									<br>
+									<button class="btn btn-success" type="submit" id="attr-class-agregar">Agregar</button>
+								</div>
 
-						<div id="edit-properties" class="panel-component">
-							<h3>Edit properties</h3>
-							<hr>
-							<input type="text" id="edit-input">
-							<button class="btn btn-success" type="submit" id="edit-button">Guardar</button>
-						</div>
+							</div>
+						</div>				    	
+				    </div>
+				    <div role="tabpanel" class="tab-pane" id="messages">...</div>
+				    <div role="tabpanel" class="tab-pane" id="settings">...</div>
+				  </div>
 
-						<div id="edit-directly" class="panel-component">
-							<h3>Edit CSS directly</h3>
-							<hr>
-							<input type="text" id="edit-direct" placeholder="; separated styles">
-							<button class="btn btn-success" type="submit" id="edit-direct-save">Aplicar</button>
-						</div>
-
-					</div>
 				</div>
 			</div>
 			<div class="col-md-4">

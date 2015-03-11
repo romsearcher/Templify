@@ -26,7 +26,8 @@ $(document).ready(function() {
 
 	$("#select").click(function (){
 		if (selectedElem != null){
-			selectedElem.css("color", "black");
+			//REMOVE
+			// selectedElem.css("color", "black");
 		}
 		selectedElement(temp);
 		window.parent.selectedElementChanged();
@@ -38,6 +39,8 @@ $(document).ready(function() {
 			temp = null;
 			selectedElem = null;
 		}
+		//ISSUE #9 Manage the templify-wrapper
+		// window.parent.selectedElementChanged();
 	});
 
 	$("#edit").click(function (){
@@ -53,7 +56,7 @@ $(document).ready(function() {
 
 	$("#parent").click(function (){
 		if (selectedElem != null){
-			selectedElem.css("color", "black");
+			// selectedElem.css("color", "black");
 		}
 		selectedElement($(temp).parent());
 		window.parent.selectedElementChanged();
@@ -61,10 +64,26 @@ $(document).ready(function() {
 
 });
 
+//Important function! Should correctly manage the style of the selected element
 function selectedElement(element){
+	if(selectedElem != null){
+		// var elem = selectedElem;
+		// var par = $(selectedElem).parent().parent();
+		// $("div.templify-wrapper").remove();
+		// $(par).append($(selectedElem));
+		$(selectedElem).unwrap();	
+	}
 	selectedElem = element;
 	temp = null;
-	$(selectedElem).css("color","red");
+
+	// var wrapper = $("<div>").attr("class","templify-wrapper");
+
+	// var parent = $(selectedElem).parent();
+	// $(wrapper).append(selectedElem);
+	// $(parent).append($(wrapper)); 
+
+	$(selectedElem).wrap("<div class='templify-wrapper'></div>");
+	// $(selectedElem).css("color","red");
 }
 
 function mouseX(evt) {

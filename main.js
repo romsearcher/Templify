@@ -6,6 +6,8 @@ var numCreatedComponent = 0;
 var createdComponentsArray = new Array();
 var currentSelectedElement = null;
 
+var classBtnTxt = "<button type='button' class='btn btn-labeled btn-success'><span class='btn-label'><i class='glyphicon glyphicon-remove'></i></span><span class='my-text'>btn</span></button>";
+
 $(document).ready( function (){
 
 	//---------------------------------------------------------------------
@@ -136,7 +138,7 @@ $(document).ready( function (){
 
 	$("#up-one-btn").click(function (){
 		var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
-		$("#paginaWeb")[0].contentWindow.selectedElement($(selectedChildElem).parent());
+		$("#paginaWeb")[0].contentWindow.selectedElement($(selectedChildElem).parent().parent());
 		selectedElementChanged();
 	});
 
@@ -150,16 +152,16 @@ $(document).ready( function (){
 
 	$("#right-one-btn").click(function (){
 		var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
-		var children = $(selectedChildElem).parent().children();
+		var children = $(selectedChildElem).parent().parent().children();
 
 		var myPos = 0;
 		//minus one for the element for the menu
-		for (var i = 0; i < children.length - 1; i++){
-			if ($(children[i]).is(selectedChildElem)) {
+		for (var i = 0; i < children.length; i++){
+			if ($(children[i]).is($(selectedChildElem).parent())) {
 				myPos = i;
 			}
 		}
-		if (myPos + 1 < children.length - 1) {
+		if (myPos + 1 < children.length) {
 			myPos++;
 		}
 
@@ -171,12 +173,12 @@ $(document).ready( function (){
 	//DRY fix required
 	$("#left-one-btn").click(function (){
 		var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
-		var children = $(selectedChildElem).parent().children();
+		var children = $(selectedChildElem).parent().parent().children();
 
 		var myPos = 0;
 		//minus one for the element for the menu
-		for (var i = 0; i < children.length - 1; i++){
-			if ($(children[i]).is(selectedChildElem)) {
+		for (var i = 0; i < children.length; i++){
+			if ($(children[i]).is($(selectedChildElem).parent())) {
 				myPos = i;
 			}
 		}
@@ -187,7 +189,33 @@ $(document).ready( function (){
 		$("#paginaWeb")[0].contentWindow.selectedElement($(children[myPos]));
 		selectedElementChanged();
 	});
+
+	$("#attr-id-save").click(function (){
+		var idVal = $("#attr-id").val();
+		var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
+		$(selectedChildElem).attr("id",idVal);
+	});
+
+	$("#attr-class-agregar").click(function (){
+		var classVal = $("#attr-class").val();
+		//Check for split inputs
+		var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
+		$(selectedChildElem).addClass(classVal);
+		selectedElementChanged();
+		$("#attr-class").val("");
+	});
 });
+
+function addEventClassButtonClicked(){
+	$(".btn-labeled").click(function (){
+		var span = $(this).children()[1];
+		var txtClass = $(span).text();
+		var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
+		
+		$(selectedChildElem).removeClass(txtClass);
+		selectedElementChanged();
+	});
+}
 
 function toObject(arr) {
   var rv = {};
@@ -209,9 +237,31 @@ function selectedElementChanged(){
 	var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
 	$("#tag-name").text($(selectedChildElem).prop("tagName"));
 
+	$("#attr-id").val($(selectedChildElem).prop("id"));
+	classesForElement(selectedChildElem);
 	//CALL to recursive algorithm function
 	makeTreed();
 	$('#tree1').treed();	
+}
+
+function classesForElement(element){
+	var classContainer = $("#attr-classes");
+	$(classContainer).empty();
+
+	var classTxt = $(element).attr("class");
+	if(typeof classTxt != 'undefined'){
+		if (classTxt !== "") {
+			var classes = classTxt.split(" ");
+			for (var i = classes.length - 1; i >= 0; i--) {
+				var btn = $.parseHTML(classBtnTxt);
+				var cs = $(btn).children();
+				$(cs[1]).text(classes[i]);
+				$(classContainer).append(btn);
+				// classes[i]
+			}
+		}
+	}
+	addEventClassButtonClicked();
 }
 
 function makeTreed(){

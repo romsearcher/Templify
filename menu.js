@@ -20,6 +20,17 @@ $(document).ready(function() {
 
 	$(document).bind("click", function(event) {
 		if (!lockMenu) {
+			temp = $(event.target);
+			if ($("#rmenu").find(temp).length > 0 || $("#rmenu").is(temp) || $(temp).is("html")) {
+        		//Nothing
+	        }else if($(temp).is($("body"))){
+	        	//Nothing
+	        }else{
+	        	//Stupid Jquery contains not working	        	
+	        	if(!$(temp).is($("body")))
+	        		selectedElement(temp);
+	        }
+
 			$("#rmenu").hide();
 		}	
 	});
@@ -30,28 +41,10 @@ $(document).ready(function() {
 			// selectedElem.css("color", "black");
 		}
 		selectedElement(temp);
-		window.parent.selectedElementChanged();
 	});
 
 	$("#delete").click(function (){
-		if (temp != null) {
-			if ($(selectedElem).is(temp) && $(selectedElem).is($("body"))){
-				temp = null;
-			}else if ($(selectedElem).is(temp)) {
-				$(".templify-wrapper").remove();
-				temp = null;
-				selectedElem = null;
-			}else if ($(".templify-wrapper").is(temp)) {
-				temp = null;
-			}else if ($("body").is(temp)){
-				temp = null;
-			}else{
-				$(temp).remove();
-				temp = null;
-			}
-		}
-		//ISSUE #9 Manage the templify-wrapper
-		window.parent.selectedElementChanged();
+		deleteElement(false);
 	});
 
 	$("#edit").click(function (){
@@ -94,7 +87,32 @@ function selectedElement(element){
 	// $(parent).append($(wrapper)); 
 
 	$(selectedElem).wrap("<div class='templify-wrapper'></div>");
+	window.parent.selectedElementChanged();
 	// $(selectedElem).css("color","red");
+}
+
+function deleteElement(elim){
+	if (elim) {
+		$(".templify-wrapper").remove();
+			temp = null;
+			selectedElem = null;
+	}else{
+		if ($(selectedElem).is(temp) && $(selectedElem).is($("body"))){
+			temp = null;
+		}else if ($(selectedElem).is(temp)) {
+			$(".templify-wrapper").remove();
+			temp = null;
+			selectedElem = null;
+		}else if ($(".templify-wrapper").is(temp)) {
+			temp = null;
+		}else if ($("body").is(temp)){
+			temp = null;
+		}else{
+			$(temp).remove();
+			temp = null;
+		}
+	}
+	window.parent.selectedElementChanged();
 }
 
 function mouseX(evt) {

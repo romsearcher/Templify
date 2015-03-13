@@ -49,6 +49,10 @@ $(document).ready( function (){
 		$(selectedChildElem).text(text);
 	});
 
+	$("#btn-delete-element").click(function (){
+		$("#paginaWeb")[0].contentWindow.deleteElement(true);
+	});
+
 	$("#edit-direct-save").click(function (){
 		var cssProps = $("#edit-direct").val();
 		var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
@@ -69,9 +73,13 @@ $(document).ready( function (){
 			var arr = new Array();
 			// arr[min[0]] = min[1];
 			// finalArray.push(arr);
-			plainObj[min[0]] = min[1];
-			finalArray[ min[0] ] = min[1];
-
+			if (min.length > 2) {
+				//Check but we asume something like background: url(http: something) which has : two times
+				plainObj[min[0]] = min[1] + ":" + min[2];
+			}else{
+				plainObj[min[0]] = min[1];
+				finalArray[ min[0] ] = min[1];
+			}	
 			// if (key == styleList.length - 1)
 			// 	finalArray += value;
 			// else
@@ -145,10 +153,12 @@ $(document).ready( function (){
 
 	$("#down-one-btn").click(function (){
 		var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
-
 		//Could also be used to traverse same level elements
-		$("#paginaWeb")[0].contentWindow.selectedElement($(selectedChildElem).children()[0]);
-		selectedElementChanged();
+
+		if ($(selectedChildElem).children().length > 0) {
+			$("#paginaWeb")[0].contentWindow.selectedElement($(selectedChildElem).children()[0]);
+			selectedElementChanged();
+		}
 	});
 
 	$("#right-one-btn").click(function (){

@@ -7,7 +7,7 @@ $(document).ready(function() {
 
 	$("#rmenu").hide();
 
-	$(document).bind("contextmenu", function(event) {
+	$(document).bind("contextmenu", function(event) { 
 		event.preventDefault();
 
 		$("#rmenu").css({top: event.pageY + "px", left: event.pageX + "px"});
@@ -35,12 +35,23 @@ $(document).ready(function() {
 
 	$("#delete").click(function (){
 		if (temp != null) {
-			$(temp).remove();
-			temp = null;
-			selectedElem = null;
+			if ($(selectedElem).is(temp) && $(selectedElem).is($("body"))){
+				temp = null;
+			}else if ($(selectedElem).is(temp)) {
+				$(".templify-wrapper").remove();
+				temp = null;
+				selectedElem = null;
+			}else if ($(".templify-wrapper").is(temp)) {
+				temp = null;
+			}else if ($("body").is(temp)){
+				temp = null;
+			}else{
+				$(temp).remove();
+				temp = null;
+			}
 		}
 		//ISSUE #9 Manage the templify-wrapper
-		// window.parent.selectedElementChanged();
+		window.parent.selectedElementChanged();
 	});
 
 	$("#edit").click(function (){

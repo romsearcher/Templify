@@ -37,6 +37,7 @@ $(document).ready( function (){
 			$(selectedChildElem).before($("<" + text + ">").text("This is a before " + text));
 		}else if (insertingStyle == 1) {
 			$(selectedChildElem).append($("<" + text + ">").text("This is an appended " + text));
+			selectedElementChanged();
 		}else if (insertingStyle == 2) {
 			$(selectedChildElem).after($("<" + text + ">").text("This is a after " + text));
 		}
@@ -235,16 +236,26 @@ function saveEditChangesElement(){
 
 function selectedElementChanged(){
 	var selectedChildElem = $("#paginaWeb")[0].contentWindow.selectedElem;
-	$("#tag-name").text($(selectedChildElem).prop("tagName"));
+	if(selectedChildElem == null || typeof selectedChildElem == 'undefined'){
+		$("#tag-name").text("-No element selected-");
+		makeTreed();
+		$('#tree1').treed();
 
-	$("#attr-id").val($(selectedChildElem).prop("id"));
-	classesForElement(selectedChildElem);
-	//CALL to recursive algorithm function
-	makeTreed();
-	$('#tree1').treed();	
+		$("#attr-id").val("");
+	}else{
+		$("#tag-name").text($(selectedChildElem).prop("tagName"));
+
+		$("#attr-id").val($(selectedChildElem).prop("id"));
+		classesForElement(selectedChildElem);
+		//CALL to recursive algorithm function
+		makeTreed();
+		$('#tree1').treed();
+	}	
 }
 
 function classesForElement(element){
+	//check null condition
+
 	var classContainer = $("#attr-classes");
 	$(classContainer).empty();
 

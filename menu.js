@@ -26,11 +26,11 @@ $(document).ready(function() {
 	        }else if($(temp).is($("body"))){
 	        	//Nothing
 	        }else{
-	        	//Stupid Jquery contains not working	        	
+	        	//Stupid Jquery contains not working	
+	        	// Better to use find! solution        	
 	        	if(!$(temp).is($("body")))
 	        		selectedElement(temp);
 	        }
-
 			$("#rmenu").hide();
 		}	
 	});
